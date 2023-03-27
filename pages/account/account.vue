@@ -226,7 +226,7 @@ export default {
 }
 
 .my-account .wrapper .header .headerCon {
-  background-image: url('http://pic.linfeng.tech/test/20220420/0011e99b1f8846aba5472ded5d26b76b.png');
+  background-image: url('@/static/images/background-image.png');
   background-repeat: no-repeat;
   background-size: 100%;
   height: 100%;
@@ -287,7 +287,7 @@ export default {
 }
 
 .my-account .wrapper .header .another {
-  // background-image: url('http://pic.linfeng.tech/test/20220420/0011e99b1f8846aba5472ded5d26b76b.png');
+  background-image: url('@/static/images/background-image.png');
   background-repeat: no-repeat;
   background-size: 100%;
   height: 100%;

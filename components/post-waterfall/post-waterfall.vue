@@ -4,7 +4,7 @@
 			<template v-slot:left="{ leftList }">
 				<view @click="jump(item)" class="demo-warter warter-left" v-if="item.media&&item.media.length > 0" v-for="(item, index) in leftList" :key="index">
 					<!-- 警告：微信小程序中需要hx2.8.11版本才支持在template中结合其他组件，比如下方的lazy-load组件 -->
-					<block v-if="item.type == 1"><u-lazy-load threshold="300" border-radius="20" :image="item.media[0]" :index="index"></u-lazy-load></block>
+					<block v-if="item.type == 1 || item.type == 11"><u-lazy-load threshold="300" border-radius="20" :image="item.media[0]" :index="index"></u-lazy-load></block>
 					<block v-else>
 						<view class="video-wrap">
 							<!-- 如果使用阿里云存储打开如下两行代码注释 -->
@@ -18,7 +18,7 @@
 					</block>
 
 					<view class="footer-wrap">
-						<view class="p-title">{{ item.content }}</view>
+						<view class="p-title">{{ getFormatPostContent(item) }}</view>
 						<view class="p-user">
 							<u-avatar size="35" :src="item.userInfo.avatar"></u-avatar>
 							<text class="username">{{ item.userInfo.username }}</text>
@@ -32,7 +32,7 @@
 			</template>
 			<template v-slot:right="{ rightList }">
 				<view @click="jump(item)" class="demo-warter warter-right" v-if="item.media&&item.media.length > 0" v-for="(item, index) in rightList" :key="index">
-					<block v-if="item.type == 1"><u-lazy-load threshold="300" border-radius="20" :image="item.media[0]" :index="index"></u-lazy-load></block>
+					<block v-if="item.type == 1 || item.type==11"><u-lazy-load threshold="300" border-radius="20" :image="item.media[0]" :index="index"></u-lazy-load></block>
 					<block v-else>
 						<view class="video-wrap">
 							<image class="cover-img" mode="aspectFill" :src="item.media[0] + '?vframe/jpg/offset/1'"></image>
@@ -40,7 +40,7 @@
 						</view>
 					</block>
 					<view class="footer-wrap">
-						<view class="p-title">{{ item.content }}</view>
+						<view class="p-title">{{ getFormatPostContent(item) }}</view>
 						<view class="p-user">
 							<u-avatar size="35" :src="item.userInfo.avatar"></u-avatar>
 							<text class="username">{{ item.userInfo.username }}</text>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import LoveJsonRequestor from '../../utils/love-json-requestor.js'
 export default {
 	props: {
 		list: Array,
@@ -67,12 +68,17 @@ export default {
 		}
 	},
 	methods: {
-	
+		// getTitle(post) {
+		// 	return loveJsonRequestor.getExactGenderFromPost(post.content) +'-'+ post.title 				
+		// },
+		getFormatPostContent(post) {
+			return LoveJsonRequestor.getExactGenderFromPost(post.content) +'-' + LoveJsonRequestor.getExactContentFromPost(post.content)
+		},
 		jump(e) {
 			let url;
 		
 			// 图文
-			if (e.type == 1 || e.type == 4) {
+			if (e.type == 1 || e.type == 4 || e.type == 11) {
 				if(e.cut == 0){
 					url = '/pages/post/detail?id=' + e.id;
 				}else{

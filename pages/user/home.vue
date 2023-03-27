@@ -4,7 +4,7 @@
 			<u-navbar :custom-back="onBack" back-icon-color="#fff" :background="background" :border-bottom="false">
 			</u-navbar>
 		</view>
-		<image class="head-bg u-skeleton-rect" src="http://pic.linfeng.tech/test/20220126/f77983f1a4ee489b99376781d0519aad.png"></image>
+		<image class="head-bg u-skeleton-rect" src="../../static/images/huakai_img_txt.png"></image>
 		<view class="con-c">
 			<view class="user-info">
 				<!-- <image class="avatar" :src="userInfo.avatar"></image> -->
@@ -50,7 +50,7 @@
 							<view class="level">
 								<u-icon name="level"></u-icon>
 							</view>
-							<text>林风科技官方账号</text>
+							<text>后厂花开官方账号</text>
 						</view>
 						<text>性别：{{userInfo.gender}}</text>
 						<text>地区：{{userInfo.city}}</text>
@@ -107,7 +107,7 @@
 					backgroundColor: 'unset'
 				},
 				tabs: [{
-						tab_name: '主页'
+						tab_name: '广场'
 					}, {
 						tab_name: '帖子'
 					},
@@ -186,6 +186,7 @@
 					uid: this.uid
 				}).then(res => {
 					this.postList = this.postList.concat(res.result.data);
+					// console.log('posts:' + JSON.stringify(this.postList))
 					if (res.result.current_page >= res.result.total || res.result.last_page === 0) {
 						this.loadStatus = "nomore";
 					} else {

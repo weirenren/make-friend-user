@@ -335,7 +335,7 @@
 	}
 	
 	.sign .wrapper .list .item .venus {
-	  background-image: url('http://pic.linfeng.tech/test/20220507/e23d1c3bc2c04c1c944392a02e9fc274.png');
+	      background-image: url('@/static/images/xing.png');
 	  background-repeat: no-repeat;
 	  background-size: 100% 100%;
 	  width: 0.56 * 100rpx;
@@ -344,11 +344,11 @@
 	}
 	
 	.sign .wrapper .list .item .venus.venusSelect {
-	  background-image: url('http://pic.linfeng.tech/test/20220507/fdb7638c7cde4c1c9f451f9a0fac5508.png');
+      background-image: url('@/static/images/xing.png');
 	}
 	
 	.sign .wrapper .list .item .venus.reward {
-	  background-image: url('http://pic.linfeng.tech/test/20220507/4840465523b44096adc2e8fa74b25793.png');
+	  background-image: url('@/static/images/xing.png');
 	  width: 0.75 * 100rpx;
 	  height: 0.56 * 100rpx;
 	}
@@ -369,7 +369,7 @@
 	}
 	
 	.sign .wrapper .lock {
-	  background-image: url('http://pic.linfeng.tech/test/20220507/2c65aef8a3d241e09c4087aa2ba53915.png');
+	 background-image: url('@/static/images/xing.png');
 	  background-repeat: no-repeat;
 	  background-size: 100% 100%;
 	  width: 5.58 * 100rpx;
@@ -406,7 +406,7 @@
 	  text-align: center;
 	  line-height: 1.16 * 100rpx;
 	  margin-right: 0.19 * 100rpx;
-	  background-image: url('http://pic.linfeng.tech/test/20220507/3af7f77b6a13463caf59b5745a75c739.png');
+      background-image: url('@/static/images/xing.png');
 	}
 	
 	.sign .wrapper2 .list2 .data {
@@ -477,7 +477,7 @@
 	}
 	
 	.sign .signTip .signTipCon {
-	  background-image: url('http://pic.linfeng.tech/test/20220507/9ce069322cbe439b8e2ef1d03b6c065a.png');
+      background-image: url('@/static/images/xing.png');
 	  background-repeat: no-repeat;
 	  background-size: 100% 100%;
 	  width: 4.2 * 100rpx;

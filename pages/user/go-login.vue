@@ -1,7 +1,7 @@
 <template>
 	<view class="container flex-items-plus flex-column">
 		<view class="login-logoBox">
-			<image class="login-logo" :src="logoUrl"></image>
+			<image class="login-logo" src="../../static/images/huakai_img_txt.png"></image>
 		</view>
 		<view class="loginTitle-text flex-column-plus flex-items font-color-666 fs26">
 			<text>为了给您提供更好的服务</text>
@@ -10,7 +10,7 @@
 		<view>
 
 			<!-- #ifdef H5 -->
-			<view class="loginBut"  @click="goMobileLogin">手机号登录</view>
+			<!-- <view class="loginBut"  @click="goMobileLogin">手机号登录</view> -->
 			<view v-if="emailLogin=='1'" class="loginButton"  @click="goEmailLogin">邮箱登录</view>
 			<!-- #endif -->
 		</view>
@@ -66,7 +66,12 @@
 		}
 	}
 </script>
-
+<style>
+	page {
+		background-color: #f5f5f5;
+		height: 100%;
+	}
+</style>
 <style lang="scss">
 	.container {
 		background-color: #FFFFFF;

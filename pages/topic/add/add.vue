@@ -13,6 +13,7 @@
 					@on-remove="onRemove1"
 					:before-upload="beforeUpload"
 					max-count="1"
+					:max-size="0.5 * 1024 * 1024"
 					@on-uploaded="onUploaded1"
 				></u-upload>
 			</u-form-item>

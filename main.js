@@ -1,8 +1,15 @@
 import Vue from 'vue'
+
+//导入PC适配JS(H5)
+// #ifdef H5
+// import "./pc";
+// #endif
+
 import App from './App'
 
 import request from './utils/request.js'
 Vue.prototype.$H = request;
+// request.hookImg();
 
 // 挂载Vuex
 import store from './store';  
@@ -26,7 +33,6 @@ Vue.use(uView);
 Vue.config.productionTip = false
 
 App.mpType = 'app'
-
 
 //时间格式化
 

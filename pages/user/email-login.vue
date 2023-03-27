@@ -1,10 +1,10 @@
 <template>
   <view class="container flex-items-plus flex-column">
     <view class="login-logoBox">
-      <image class="login-logo" :src="logoUrl"></image>
+      <image class="login-logo" src="../../static/images/huakai_img_txt.png"></image>
     </view>
     <view class="iphoneNum-box flex-row-plus flex-items">
-      <view style="margin-right: 30rpx">
+      <view style="margin-right: 20rpx">
         <image class="loginIconEmail"
                src="../../static/images/email.png"></image>
       </view>
@@ -17,7 +17,7 @@
     </view>
     <view class="flex-row-plus mar-top-20">
       <view class="code-box">
-        <view style="margin-right: 30rpx">
+        <view style="margin-right: 20rpx">
           <image class="loginIcon"
                  src="../../static/images/code.png"></image>
         </view>
@@ -62,7 +62,7 @@
 			this.getSysInfo();
 		},
 		onShow() {
-			this.getSysInfo();
+			// this.getSysInfo();
 		},
 		methods: {
 			getSysInfo() {
@@ -79,12 +79,18 @@
 					}
 					
 				});
+				
+				const email = uni.getStorageSync("email")
+				if (email) {
+					this.form.email = email
+				}
+				
 			},
 			phoneLogin() {
-				if(this.form.email==''){
+				if(this.form.email.trim()==''){
 					this.$u.toast('请输入邮箱');
 					return;
-				}else if(this.form.code==''){
+				}else if(this.form.code.trim()==''){
 					this.$u.toast('请输入验证码');
 					return;
 				}
@@ -108,6 +114,7 @@
 			getUserInfo() {
 				this.$H.get("user/userInfo").then(res => {
 					uni.setStorageSync("userInfo", res.result)
+					uni.setStorageSync("email", res.result.email)
 				})
 			},
 			getCode() {
@@ -143,14 +150,19 @@
 		}
 	}
 </script>
-
+<style>
+	page {
+		background-color: #f5f5f5;
+		height: 100%;
+	}
+</style>
 <style lang="scss" scoped>
 .container {
   background-color: #FFFFFF;
   height: 100vh;
 
   .login-logoBox {
-    margin-top: -300rpx;
+    margin-top: -200rpx;
 
     .login-logo {
       width: 200rpx;
@@ -175,7 +187,7 @@
 
     .iphoneNum-input {
       color: #999999;
-      font-size: 28rpx;
+      font-size: 26rpx;
       font-weight: 400;
     }
   }
@@ -187,7 +199,7 @@
 
     .passwordNum-input {
       color: #999999;
-      font-size: 28rpx;
+      font-size: 26rpx;
       font-weight: 400;
       width: 346rpx;
     }
@@ -199,7 +211,7 @@
     width: 360rpx;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
 
     .loginIcon {
@@ -213,7 +225,7 @@
 
     .codeNum-input {
       color: #999999;
-      font-size: 28rpx;
+      font-size: 26rpx;
       font-weight: 400;
     }
   }
@@ -226,7 +238,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left: 20rpx;
+    margin-left: 0rpx;
     color: #FFFFFF;
   }
 

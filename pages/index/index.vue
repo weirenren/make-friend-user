@@ -1,13 +1,48 @@
 <template>
 	<view>
 		<!-- navbar -->
-		<u-navbar :is-back="false" z-index="99999">
-			<!-- tabs -->
+	<!-- 	<u-navbar :is-back="false" z-index="99999">
+	
 			<u-tabs :list="tabList" font-size="35" name="cateName" bg-color="#fff" :current="current"
 				@change="tabChange"></u-tabs>
-		</u-navbar>
+		</u-navbar> -->
 		<!-- 最新 -->
-		<view v-if="current === 2">
+		<view>
+			<view class="topic-wrap">
+				<view v-if="joinTopicList && joinTopicList.length > 0" class="block-title">
+					<view>我加入的圈子</view>
+					<view style="display: flex;">
+						<text @click="jumpMoreQuanzi">
+							更多圈子
+						</text>
+						<u-image style="margin-top: 4rpx;" width="25rpx" height="25rpx" src="/static/images/icon/right.png"></u-image>
+					</view>
+					
+				</view>
+				<u-grid @click="jump" :col="5" :border="false">
+					<!-- 我的圈子 -->
+					<u-grid-item :index="'/pages/topic/detail?id='+item.id"
+						v-for="(item, index) in joinTopicList" :key="index">
+						<view class="grid-topic">
+							<u-image width="120rpx" :border-radius="10" height="120rpx" :src="item.coverImage">
+							</u-image>
+							<view class="name">{{ item.topicName.substring(0, 5) }}</view>
+							<text v-if="sessionUid == item.uid" class="user">圈主</text>
+						</view>
+					</u-grid-item>
+					<!-- 创建圈子 -->	
+					<u-grid-item index="/pages/topic/add/add">
+						<navigator class="grid-topic">
+							<u-image width="120rpx" :border-radius="10" height="120rpx" src="/static/add-1.png">
+							</u-image>
+							<view class="name">创建圈子</view>
+						</navigator>
+					</u-grid-item>
+				</u-grid>
+			</view>
+			
+			<love-activity-enter v-if="renderActivityView" :act_object="getActivityPost()"></love-activity-enter>
+		
 			<post-list :list="lastPost" :loadStatus="loadStatus4" :showTag="true"></post-list>
 			<!-- <post-waterfall :list="lastPost" :loadStatus="loadStatus4"></post-waterfall> -->
 		</view>
@@ -47,13 +82,14 @@
 			<post-waterfall :list="joinTopicPost" :loadStatus="loadStatus3"></post-waterfall>
 		</view>
 		<!-- tabbar -->
-		<q-tabbar :active="0" :count="msgCount"></q-tabbar>
+		<q-tabbar :active="1" :count="msgCount"></q-tabbar>
 		<!-- 返回顶部 -->
 		<q-back-top></q-back-top>
 	</view>
 </template>
 
 <script>
+	import loveActivityEnter from '../../components/love-activity-enter/love-activity-enter.vue'
 	import postList from '../../components/post-list/post-list.vue';
 	import postWaterfall from '../../components/post-waterfall/post-waterfall.vue';
 	export default {
@@ -64,6 +100,7 @@
 		data() {
 			return {
 				sessionUid: uni.getStorageSync('userInfo').uid,
+				userType: uni.getStorageSync('userInfo').type,
 				loadStatus1: 'loadmore',
 				loadStatus2: 'loadmore',
 				loadStatus3: 'loadmore',
@@ -77,6 +114,8 @@
 				swiperList: [],
 				followUserPost: [],
 				joinTopicPost: [],
+				activityList: [],
+				renderActivityView: false,
 				lastPost: [],
 				tabList: [{
 						name: '关注'
@@ -112,6 +151,8 @@
 		onLoad() {
 			this.getSysInfo();
 			this.getLastPost();
+			this.getJoinTopicPost();
+			this.getUserJoinTopic();
 		},
 		onShow() {
 			this.getMsgNum();
@@ -199,10 +240,37 @@
 					url:url
 				})
 			},
+			jumpMoreQuanzi() {
+				uni.navigateTo({
+					url:'/pages/topic/class-list'
+				})
+			},
 			getSysInfo() {
 				this.$H.get('system/miniConfig').then(res => {
 					this.shareCover = res.result.intro;
 				});
+			},
+			parseActivity(page, postList) {
+				console.log('parseActivity')
+				if (page == 1 && this.activityList.length == 0) {
+					for (var i = 0; i < postList.length; i++) {
+						const post = postList[i]
+						
+						if (post.type == 10) { 
+							this.activityList.push(post)
+						}
+					}
+					
+					if (this.activityList.length > 0) {
+						this.renderActivityView = true
+						
+						// console.log('renderActivityView')
+					}
+					// console.log(this.activityList)
+				}
+			},
+			getActivityPost() {
+				return this.activityList[0];
 			},
 			// 获取加入的圈子动态
 			getJoinTopicPost() {
@@ -218,6 +286,8 @@
 						} else {
 							this.loadStatus3 = 'loadmore';
 						}
+						
+						this.parseActivity(this.page3, this.joinTopicPost);
 					});
 			},
 			// 获取关注用户帖子
@@ -285,7 +355,9 @@
 		padding: 20rpx;
 		color: #616161;
 		display: flex;
+		justify-content: space-between;
 		font-size: 28rpx;
+		
 		.right{
 			margin-left: auto;
 			color: #999;

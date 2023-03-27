@@ -7,17 +7,17 @@
 					<text class="user-name">{{ postDetail.userInfo.username }}</text>
 					<view class="cxplain">{{ postDetail.userInfo.intro }}</view>
 				</view>
-				<u-button v-show="postDetail.isFollow" size="mini" style="float:right;font-size: 14px;" @click="cancelFollow">已关注</u-button>
-				<u-button v-show="!postDetail.isFollow" size="mini" style="float:right;font-size: 14px;" @click="follow">关注</u-button>
+				<u-button v-show="postDetail.isFollow" size="mini" style="float:right;font-size: 11px;" @click="cancelFollow">已关注</u-button>
+				<u-button v-show="!postDetail.isFollow" size="mini" style="float:right;font-size: 11px;" @click="follow">关注</u-button>
 			</view>
 			<view class="icon">
 				<text>{{ postDetail.createTime | timeFormat }}</text>
 			</view>
 			<view class="hr"></view>
-			<view class="post-title">{{ postDetail.title }}</view>
+			<view class="post-title">{{ getTitle(postDetail) }}</view>
 			<rich-text class="post-text" @longpress="onCopy" :nodes="postDetail.content"></rich-text>
 			<!-- 图片 -->
-			<block v-if="postDetail.type == 1">
+			<block v-if="postDetail.type == 11 || postDetail.type == 1">
 				<!--一张图片-->
 				<block v-if="postDetail.media.length == 1">
 					<image
@@ -202,11 +202,12 @@
 				@blur="onBlur"
 				:focus="focus"
 				fixed="true"
-				cursor-spacing="10"
+				cursor-spacing="5"
 				v-model="form.content"
 				auto-height="true"
 				placeholder-class="txt-placeholder"
 				confirm-type="send"
+				style="width: 100%;"
 				@confirm="addComment"
 			></textarea>
 			<u-button @click="addComment" :disabled="isSubmitD" :custom-style="btnStyle" style="border-radius: 0;">发布</u-button>
@@ -222,8 +223,12 @@
 				<!-- #endif -->
 				<!-- #ifdef H5 -->
 				<view class="share-item2" @click="copyPageUrl">
-					<image src="/static/images/share.png"></image>
+					<image src="/static/images/shareurl.png"></image>
 					<text>分享链接</text>
+				</view>
+				<view class="share-item2" @click="copyPageDetail">
+					<image src="/static/images/sharecontent.png"></image>
+					<text>分享详情</text>
 				</view>
 				<!-- #endif -->
 				<!-- <view class="share-item" @click="shareCanvas">
@@ -240,9 +245,12 @@
 			</view>
 		</u-popup>
 	</view>
-</template>
+</template>x
 
 <script>
+	
+import loveJsonRequestor from '../../utils/love-json-requestor.js'
+import commonUtil from '../../utils/h-common.js'
 export default {
 	data() {
 		return {
@@ -252,6 +260,7 @@ export default {
 			},
 			unitId: this.$c.postDetailAd,
 			postId: 0,
+			gender: '',
 			postDetail: {
 				comment: [],
 				media: [],
@@ -333,6 +342,12 @@ export default {
 		};
 	},
 	methods: {
+		getTitle(post) {
+			if (this.gender != '') {
+				return this.gender +'-'+ post.title
+			}
+			return post.title 				
+		},
 		messageRead(mid){
 			// console.log('====>',this.postId,mid)
 			this.$H
@@ -343,6 +358,9 @@ export default {
 				.then(res => {
 					
 				});
+		},
+		buildH5ShareContent() {
+			return "[后厂花开—单身交友]" + commonUtil.stringSub(this.postDetail.content, 100) + "\n详情：" + this.$c.shareH5Url+'pages/post/detail?id=' + this.postId
 		},
 		voteSubmit() {
 			let voteDate = [];
@@ -387,6 +405,17 @@ export default {
 			let that = this;
 			uni.setClipboardData({
 				data: this.$c.shareH5Url+'pages/post/detail?id=' + this.postId,
+				success: function() {
+					uni.hideToast();
+					that.$q.toast('复制成功快分享给好友叭~', 'success');
+					that.showShare = false;
+				}
+			});
+		},
+		copyPageDetail() {
+			let that = this;
+			uni.setClipboardData({
+				data: this.buildH5ShareContent(),
 				success: function() {
 					uni.hideToast();
 					that.$q.toast('复制成功快分享给好友叭~', 'success');
@@ -508,7 +537,7 @@ export default {
 			// 来源
 			context.setFillStyle('#616161');
 			context.setFontSize(14);
-			context.fillText('来源：林风圈子', 20, 430, 300);
+			context.fillText('来源：后厂花开', 20, 430, 300);
 
 			// 圈子二维码
 			let qrCode = await this.getQrCode();
@@ -703,9 +732,17 @@ export default {
 						}, 1500);
 					}
 					this.postDetail = res.result;
+					
+					// console.log('====>',JSON.stringify(this.postDetail))
+							
+					if (this.postDetail.type == 11) {
+						this.gender = loveJsonRequestor.getExactGenderFromPost(this.postDetail.content)
+					
+						this.postDetail.content = loveJsonRequestor.getExactContentFromPost(this.postDetail.content)
+					}
 
 					// 投票帖子
-					if (res.result.voteId > 0) {
+					if (res.result && res.result.voteId > 0) {
 						res.result.voteInfo.options.forEach(item => {
 							this.$set(item, 'checked', false);
 						});
@@ -801,10 +838,18 @@ export default {
 	}
 };
 </script>
-
+<style>
+	page {
+		background-color: #f5f5f5;
+		height: 100%;
+	}
+</style>
 <style lang="scss" scoped>
 .post-title{
-	margin: 20rpx 0;
+	margin: 10rpx 0;
+	font-size: 40rpx;
+	color: #000;
+	font-weight: bold;
 }
 .info-box {
 	padding: 20rpx;
@@ -824,7 +869,7 @@ export default {
 	.user-item-user {
 		flex: 1;
 		.cxplain {
-			font-size: 12px;
+			font-size: 11px;
 			color: #999;
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
@@ -906,8 +951,8 @@ export default {
 		}
 	}
 	.avatar {
-		width: 100rpx;
-		height: 100rpx;
+		width: 80rpx;
+		height: 80rpx;
 		border-radius: 50%;
 		margin-right: 20rpx;
 	}
@@ -915,7 +960,7 @@ export default {
 
 .sub-comment-item {
 	margin-left: 100rpx;
-	padding: 20rpx;
+	padding: 10rpx;
 	&:active{
 		background-color: #F5F5F5;
 	}
@@ -946,7 +991,7 @@ export default {
 	.reply {
 		.time {
 			margin-left: auto;
-			font-size: 20rpx;
+			font-size: 16rpx;
 			color: #999;
 		}
 		.name {
@@ -961,11 +1006,22 @@ export default {
 .comment-tool {
 	position: fixed;
 	bottom: 0;
-	width: 100%;
+	// width: 100%;
+	// min-width: 750rpx;
+    margin: 0 auto;
+	left: 0.1%;
+	right: 0.1%;
+	max-width: 1000rpx;
+	
 	background-color: #fff;
 	padding: 20rpx;
 	display: flex;
 	z-index: 999;
+
+	.txt-placeholder {
+		font-size: 26rpx;
+	}
+	
 }
 
 .comment-tool textarea {
@@ -973,6 +1029,7 @@ export default {
 	padding: 20rpx;
 	border-radius: 10rpx;
 	min-height: 40rpx;
+	font-size: 26rpx;
 }
 
 .comment-tool .u-btn {
@@ -1047,8 +1104,10 @@ export default {
 .share-wrap{
 	display: flex;
 	padding: 30rpx;
-	width: 60%;
+	width: 80%;
 	margin: 0 auto;
+	justify-content: space-between;
+	// align-items: center;
 	.share-item{
 		display: flex;
 		flex-direction: column;
@@ -1071,12 +1130,12 @@ export default {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		&:nth-child(1){
-			margin: auto;
-		}
+		// &:nth-child(1){
+		// 	margin: auto;
+		// }
 		image{
-			width: 100rpx;
-			height: 100rpx;
+			width: 80rpx;
+			height: 80rpx;
 		}
 		text{
 			font-size: 24rpx;
@@ -1144,6 +1203,8 @@ video {
 }
 
 .post-text {
-	white-space: pre-wrap;
+	// white-space: pre-wrap;
+	// color: #565656;
+	font-size: 32rpx;
 }
 </style>

@@ -121,7 +121,7 @@ export default {
 		},
 		handleJump(e){
 			uni.navigateTo({
-				url:e.url
+				url: e.url
 			})
 			
 			this.showPopup = false;
@@ -132,9 +132,19 @@ export default {
 
 <style lang="scss" scoped>
 .tabbar-wrap {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
+	// position: fixed;
+	// bottom: 0;
+
+	// width: 100%;
+	// margin:auto;
+	
+	position:fixed;
+		bottom:0;
+		left:0;
+		right:0;
+		margin-left:auto;
+		margin-right:auto;
+	
 	z-index: 99999;
 	background-color: #fff;
 	height: 52px;
@@ -161,19 +171,19 @@ export default {
 			color: #fff;
 			border-radius: 50%;
 			position: absolute;
-			right: 25rpx;
+			right: 15rpx;
 			top: 10rpx;
 			display: inline-block;
-			width: 40rpx;
-			height: 40rpx;
-			font-size: 20rpx;
+			width: 30rpx;
+			height: 30rpx;
+			font-size: 18rpx;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 		}
 		.mid-button {
-			width: 43px;
-			height: 43px;
+			width: 50px;
+			height: 50px;
 		}
 	}
 	

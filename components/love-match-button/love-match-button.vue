@@ -2,17 +2,17 @@
 
 	<view class="fix-bottom-step">
 		<view class="next-step">
-			<u-button type="primary" color="#BEBEBE" shape="circle"
-				style="margin: 30px 10px; width: 100px; opacity: 0.8;">
-				不喜欢
+			<u-button @click="unlikeClick()" type="primary" shape="circle"
+				style="margin: 50rpx 12rpx; width: 160rpx; background-color: #D9D9D9;">
+				X
 			</u-button>
-			<u-button type="primary" color="#FF83FA" shape="circle"
-				style="margin: 30px 10px; width: 100px; opacity: 0.8;">
-				可以了解
-			</u-button>
-			<u-button type="primary" color="#FF3030" shape="circle"
-				style="margin: 30px 10px; width: 100px; opacity: 0.8;">
+			<u-button @click="likeClick()" type="primary" shape="circle"
+				style="margin: 50rpx 12rpx; width: 200rpx; background-color:#A6AEF5">
 				很喜欢
+			</u-button>
+			<u-button @click="normalLike()" type="primary" shape="circle"
+				style="margin: 50rpx 12rpx; width: 200rpx; background-color:#CECDFF">
+				可以了解
 			</u-button>
 		</view>
 	</view>
@@ -26,6 +26,28 @@
 			return {
 
 			};
+		},
+		props: {
+			unlike: {
+				type: Function
+			},
+			like: {
+				type: Function
+			},
+			normalLike: {
+				type: Function
+			}
+		},
+		methods: {
+			unlikeClick() {
+				this.unlike()
+			},
+			likeClick() {
+				this.like()
+			},
+			normalLikeClick() {
+				this.normalLike()
+			}
 		}
 	}
 </script>
@@ -34,7 +56,7 @@
 	.fix-bottom-step {
 		position: fixed;
 		left: 0rpx;
-		bottom: 0rpx;
+		bottom: 80rpx;
 		z-index: 1010;
 		width: 100%;
 

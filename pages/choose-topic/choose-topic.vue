@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		<view
 			class="topic-item"
 			@click="chooseTopic(item.id, item.topicName)"
@@ -69,6 +69,19 @@ export default {
 	}
 };
 </script>
+<style>
+	page {
+		background-color: #fefcff;
+		height: 100%;
+	}
+</style>
+<style lang="scss" scoped>
+
+.container {
+	background-color: #f5f5f5;
+	height: 100%;
+}
+</style>
 
 <style lang="scss" scoped>
 @import 'choose-topic.scss';

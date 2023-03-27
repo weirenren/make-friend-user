@@ -3,18 +3,18 @@
 		<u-grid :col="3" :border="false" @click="toNav">
 			<u-grid-item index="1">
 				<u-badge :count="msgNum.thumbCount" :offset="[10, 50]"></u-badge>
-				<image class="nav-icon" src="/static/images/icon/souc.png"></image>
-				<view class="grid-text">点餐收藏</view>
+				<image class="nav-icon" src="/static/images/icon/like.png"></image>
+				<view class="grid-text">点赞</view>
 			</u-grid-item>
 			<u-grid-item index="2">
 				<u-badge :count="msgNum.follow" :offset="[10, 50]"></u-badge>
-				<image class="nav-icon" src="/static/images/icon/gz.png"></image>
-				<view class="grid-text">关注信息</view>
+				<image class="nav-icon" src="/static/images/icon/focus.png"></image>
+				<view class="grid-text">关注</view>
 			</u-grid-item>
 			<u-grid-item index="3">
 				<u-badge :count="msgNum.comment" :offset="[10, 50]"></u-badge>
-				<image class="nav-icon" src="/static/images/icon/pl.png"></image>
-				<view class="grid-text">用户评论</view>
+				<image class="nav-icon" src="/static/images/icon/comment.png"></image>
+				<view class="grid-text">评论</view>
 			</u-grid-item>
 		</u-grid>
 		<view class="msg-wrap">
@@ -30,7 +30,7 @@
 				>
 					<view class="avatar-box">
 						<u-badge v-if="item.status == 0" :is-dot="true" :offset="[5, 10]" type="error"></u-badge>
-						<u-avatar class="avatar" :src="item.userInfo.avatar"></u-avatar>
+						<u-avatar class="avatar" trsrc="/static/weigui.png"></u-avatar>
 					</view>
 					<view class="right">
 						<view>
@@ -187,7 +187,12 @@ export default {
 	}
 };
 </script>
-
+<style>
+	page {
+		background-color: #f5f5f5;
+		height: 100%;
+	}
+</style>
 <style lang="scss" scoped>
 
 .nav-icon {

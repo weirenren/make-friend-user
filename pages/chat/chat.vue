@@ -6,7 +6,7 @@
 				<text>与 {{user.username}} 闲聊中</text>
 			</view>
 		</u-navbar>
-		<view class="h-flexc" style="position: fixed;top: 120;width: 750rpx;z-index: 999;">
+		<view class="h-flexc" style="position: fixed;top: 120;right: 5%;left: 5%;;z-index: 999;">
 			<h-tips content="请遵守相应法律法规文明发言,创建和谐环境"></h-tips>
 		</view>
 		<!-- 页面主体 -->

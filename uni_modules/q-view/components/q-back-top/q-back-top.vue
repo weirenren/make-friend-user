@@ -28,6 +28,7 @@
 .back-top{
 	position: fixed;
 	right: 20rpx;
+	// right: 20%;
 	bottom: 180rpx;
 	width: 100rpx;
 	height: 100rpx;

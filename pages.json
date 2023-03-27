@@ -7,23 +7,32 @@
 		"selectedColor": "#2c2c2c",
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
-		"list": [{
+		"list": [
+			{
+				"pagePath": "pages/user/love/recommend",
+				"iconPath": "static/tabbar/quanzi-1.png",
+				"selectedIconPath": "static/tabbar/quanzi.png",
+				"text": "推荐"
+				
+			},
+			{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home-1.png",
 				"selectedIconPath": "static/tabbar/home.png",
-				"text": "主页"
+				"text": "广场"
 			},
-			{
-				"pagePath": "pages/more/more",
-				"iconPath": "static/tabbar/quanzi-1.png",
-				"selectedIconPath": "static/tabbar/quanzi.png",
-				"text": "圈子"
-			},
+			// {
+			// 	"pagePath": "pages/more/more",
+			// 	"iconPath": "static/tabbar/quanzi-1.png",
+			// 	"selectedIconPath": "static/tabbar/quanzi.png",
+			// 	"text": "圈子"
+			// },
 			{
 				"pagePath": "pages/message/message",
 				"iconPath": "static/tabbar/msg-1.png",
 				"selectedIconPath": "static/tabbar/msg.png",
 				"text": "消息"
+			
 			},
 			{
 				"pagePath": "pages/my/my",
@@ -33,19 +42,27 @@
 			}
 		]
 	},
-	"pages": [{
+	"pages": [
+		{
+			"path": "pages/user/love/recommend",
+			"style": {
+				"navigationBarTitleText": "后厂花开"
+			}
+		},
+		
+		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "主页",
-				"backgroundColor": "#fff",
+				"navigationBarTitleText": "广场",
+				// "backgroundColor": "#fff",
 				"navigationBarTextStyle": "black",
-				"enablePullDownRefresh": true,
-				"navigationStyle":"custom"
+				"enablePullDownRefresh": true
+				// "navigationStyle":"custom"
 			}
 		}, {
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "后厂花开"
 			}
 		}, {
 			"path": "pages/post/detail",
@@ -96,10 +113,14 @@
 			"path": "pages/post/add",
 			"style": {}
 		}, {
+			"path": "pages/post/love-add",
+			"style": {}
+		}, {
 			"path": "pages/message/message",
 			"style": {
 				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "消息"
+				"navigationBarTitleText": "后厂花开",
+				"backgroundColor": "blue"
 			}
 		}, {
 			"path": "pages/message/list",
@@ -256,7 +277,7 @@
             "path" : "pages/vote/vote",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "投票",
                 "enablePullDownRefresh": false
             }
             
@@ -419,10 +440,73 @@
             }
             
         }
+        ,{
+            "path" : "pages/user/love/recommend",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-match-result",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-activity-detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-activity-add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-activity-match",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "活动匹配",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-couple",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/love/love-personal-match",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "林风论坛",
+		"navigationBarTitleText": "后厂花开",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	}

@@ -42,9 +42,9 @@
 					<text class="discuss-title" :data-id="item.discussId" v-if="item.discussId > 0"
 						@tap.stop="toDiscuss">#{{ item.discussTitle }}</text>
 					<view class="post-content">
-						<rich-text class="post-text" :nodes="item.content"></rich-text>
+						<rich-text class="post-text" :nodes="getContent(item)"></rich-text>
 						<!-- 帖子类型 -->
-						<block v-if="item.type == 1">
+						<block v-if="item.type == 11">
 							<!--一张图片-->
 							<block v-if="item.media.length == 1">
 								<image :lazy-load="true" mode="aspectFill" class="img-style-1" :src="item.media[0]"
@@ -141,6 +141,7 @@
 </template>
 
 <script>
+	import loveJsonRequestor from '../../utils/love-json-requestor.js'
 	export default {
 		name: 'post-list',
 		props: {
@@ -190,7 +191,8 @@
 						key: 'delete'
 					});
 					
-				}else if(this.admin){
+				
+				} else if(this.admin) {
 					//圈子管理员
 					this.actionList.unshift({
 						text: '删除',
@@ -207,9 +209,26 @@
 				this.sessionUid = userInfo.uid;
 			}
 
-		},
+		},		
 		methods: {
-			
+			getContent(post) {
+				var gender =  loveJsonRequestor.getExactGenderFromPost(post.content)
+				if (gender == "") {
+					return post.content.trim()
+				}
+ 			 
+			   return gender + '-' + loveJsonRequestor.getExactContentFromPost(post.content)
+			},
+			getList(postList) {
+				// console.log('postlist:' + JSON.stringify(this.list))
+
+				postList.forEach(function(item, index) {
+					console.log('postitem:' + item.content)
+					item.content = JSON.parse(item.content).content
+				});
+				
+				return postList
+			},
 			copyPageUrl(id) {
 				let that = this;
 				uni.setClipboardData({
@@ -228,12 +247,17 @@
 				this.chooseIndex = index;
 				if(this.sessionUid == this.choosePost.uid && !this.admin){
 					//帖子发布者
-					this.actionList = this.actionList.filter(item => item.key!='delete')
+					this.actionList = this.actionList.filter(item => !(item.key == 'delete' || item.key == 'update'))
 					this.actionList.unshift({
 						text: '删除',
 						color: 'red',
 						key: 'delete'
 					});
+					// this.actionList.unshift({
+					// 	text: '修改',
+					// 	color: 'red',
+					// 	key: 'update'
+					// });
 				}
 			},
 			//普通用户触发
@@ -253,6 +277,10 @@
 
 				if (key == 'delete') {
 					this.postDel();
+				}
+				
+				if (key == 'update') {
+					
 				}
 
 				if (key == 'top') {
@@ -334,7 +362,7 @@
 				let url;
 
 				// 图文
-				if (e.type == 1 || e.type == 4) {
+				if (e.type == 1 || e.type == 4 || e.type == 11) {
 					if (e.cut == 0) {
 						url = '/pages/post/detail?id=' + e.id;
 					} else {

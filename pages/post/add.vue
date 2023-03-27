@@ -3,17 +3,22 @@
 		<input v-model="form.title" class="title-input" placeholder="标题" />
 		<textarea placeholder="说些什么叭..." :auto-height="true" maxlength="-1" v-model="form.content" class="post-txt"></textarea>
 		<!-- 上传图片 -->
-		<block v-if="form.type == 1">
-			<u-upload
+		<block >
+
+			<cl-upload ref="uUpload" @input="onFileChange" @onFileChange="onFileChange" :imageFormData="imageFormData" @onImage="onImage" :isPreviewImage="true" fileType="image" :action="uploadImgUrl" :autoUpload="false" >
+				
+			</cl-upload>
+			<!-- <u-upload
 				ref="uUpload"
 				:size-type="['original']"
 				name="Image"
-				:max-count="9"
+				:max-size="1 * 1024 * 1024"
+				:max-count="5"
 				:header="header"
 				:action="uploadImgUrl"
 				@on-uploaded="submit"
 				:auto-upload="false"
-			></u-upload>
+			></u-upload> -->
 		</block>
 		<!-- 上传视频 -->
 		<block v-if="form.type == 2">
@@ -36,10 +41,9 @@
 			<u-icon class="u-icon" name="arrow-right"></u-icon>
 		</navigator>
 		<!-- 帖子类型 -->
-		<view class="choose-item">
+<!-- 		<view class="choose-item">
 			<image class="icon" src="/static/m_3.png"></image>
 			<text class="txt">类型|{{typeName}}</text>
-			<!-- <u-switch class="sw" v-model="switch2" activeColor="#5ac725" inactive-color="#eee" @change="change"></u-switch> -->
 			  <u-radio-group
 				class="radio"
 			    v-model="radiovalue1"
@@ -55,7 +59,7 @@
 			    >
 			    </u-radio>
 			  </u-radio-group>
-		</view>
+		</view> -->
 		<!-- 付费贴价格 -->
 		<view class="choose-item" v-if="form.cut==1">
 			<image class="icon" src="/static/price.png"></image>
@@ -63,7 +67,7 @@
 			  <u-input
 				class="inputStyle"
 			    placeholder="付费金额(小数点两位以内)"
-			    border="surround"
+			    :border="true"
 				type="digit"
 				clearable
 			    v-model="form.pay"
@@ -71,11 +75,11 @@
 			  ></u-input>
 		</view>
 		<!-- 所在位置 -->
-		<view @click="chooseLocation" class="choose-item">
+	<!-- 	<view @click="chooseLocation" class="choose-item">
 			<u-icon class="icon add-icon" name="map" color="#999" size="40"></u-icon>
 			<text class="txt">{{ form.address || '所在位置' }}</text>
 			<u-icon class="u-icon" name="arrow-right"></u-icon>
-		</view>
+		</view> -->
 		<view class="submit-btn">
 			<q-button v-if="form.type == 1" @click="uploadImg" shape="circle">发布</q-button>
 			<q-button v-if="form.type == 2" @click="videoSubmit" shape="circle">发布</q-button>
@@ -84,13 +88,22 @@
 </template>
 
 <script>
+	// import htzImageUpload from '@/components/htz-image-upload/htz-image-upload.vue'
 export default {
 	data() {
 		return {
-			uploadImgUrl: this.$c.domain + 'common/upload',
+			uploadImgUrl: this.$c.domain + 'common/uploadImg',
 			topicName: '选择圈子',
 			disName: '选择话题',
 			typeName: '普通贴',
+			uploadFiles: [],
+			imageFormData: {
+				count: 3,
+				// sizeType: ['compressed'],
+				compress: true,
+				quality: 50,
+				sourceType: ['album']
+			},
 			form: {
 				title: '',
 				type: 1,
@@ -143,6 +156,9 @@ export default {
 		this.form.latitude = location.latitude;
 	},
 	methods: {
+		onFileChange(files) {
+			this.uploadFiles = files
+		},
 		inputChange(n){
 		},
 	    groupChange(n) {
@@ -232,7 +248,21 @@ export default {
 				mask: true,
 				title: '发布中'
 			});
-			this.$refs.uUpload.upload();
+			// this.$refs.uUpload.upload();
+			
+			if (this.uploadFiles.length > 0) {
+				this.$refs.uUpload.submit().then(result => {
+					// console.log("upload:" + JSON.stringify(result))
+					const imagesUrls = []
+					result.forEach((item, index) => {
+						imagesUrls.push(item.result)
+					})
+					this.submitPost(imagesUrls)
+				})
+			} else {
+				this.submitPost([])
+			}
+ 			
 		},
 		chooseLocation() {
 			let that = this;
@@ -262,6 +292,31 @@ export default {
 				if (res.code == 0) {
 					uni.redirectTo({
 						url: '/pages/post/video-detail?id=' + res.result
+					});
+				}
+				uni.hideLoading();
+			});
+		},
+		submitPost(medias) {
+			uni.showLoading({
+				mask: true,
+				title: '发布中'
+			});
+			
+			let mediaList = [];
+			medias.forEach(function(item, index) {
+				mediaList.push(item);
+			});
+			
+			this.form.media = mediaList;
+			
+			console.log("form:" + JSON.stringify(this.form))
+			
+			this.$H.post('post/addPost', this.form).then(res => {
+				console.log("upload:" + JSON.stringify(res))
+				if (res.code == 0) {
+					uni.redirectTo({
+						url: '/pages/post/detail?id=' + res.result
 					});
 				}
 				uni.hideLoading();

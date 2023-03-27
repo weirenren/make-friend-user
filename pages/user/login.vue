@@ -1,6 +1,6 @@
 <template>
 	<view class="login">
-		<image class="logo" :src="shareCover"></image>
+		<image class="logo" src=""></image>
 		<!-- <open-data class="user-avatar" type="userAvatarUrl"></open-data>
 		<open-data class="user-name" type="userNickName"></open-data> -->
 		<text class="txt1">申请获取以下权限</text>

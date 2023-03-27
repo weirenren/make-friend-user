@@ -96,7 +96,7 @@ export default {
 </script>
 <style lang="less">
 .integral-details .header {
-  background-image: url('http://pic.linfeng.tech/test/20220507/eab61163a66843a6a0718cb6dad3e1e5.png');
+  background-image: url('@/static/images/background-image.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 100%;

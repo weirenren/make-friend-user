@@ -49,14 +49,24 @@
 	};
 </script>
 
+<style>
+	
+	page {
+		font-size: 32rpx;
+		line-height: 1.5;
+	}
+	
+</style>
 <style lang="scss">
 	@import "uview-ui/index.scss";
 	@import "static/css/iconfont.css";
 
-	page {
-		font-size: 32rpx;
-		line-height: 1.7;
-	}
+/*  #ifdef  H5  */
+body {
+  max-width: 828rpx;  //最大宽度自己可以调整
+  margin: auto !important;
+}
+/*  #endif  */
 
 	.container {
 		padding: 20rpx;

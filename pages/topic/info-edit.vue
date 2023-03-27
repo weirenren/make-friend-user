@@ -12,6 +12,7 @@
 						:header="header"
 						:action="uploadImgUrl"
 						max-count="1"
+						:max-size="0.5 * 1024 * 1024"
 						@on-uploaded="onUploaded1"
 						:before-upload="beforeUpload"
 						@on-remove="onRemove1"

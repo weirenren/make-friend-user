@@ -76,12 +76,12 @@
 				</u-radio-group>
 			</view>
 			<view class="base_line_light" /> -->
-			<view class="info-item">
+<!-- 			<view class="info-item">
 				<u-checkbox-group>
 					<u-checkbox v-model="general_info_show_gongzhonghao" shape="circle" label="挂牌发布到微信公众号"></u-checkbox>
 				</u-checkbox-group>
 
-			</view>
+			</view> -->
 			<view class="base_line_light" />
 
 		</view>
@@ -171,8 +171,18 @@
 			<view class="base_line_light" />
 			<view class="info-textarea">
 				<text>个人照片</text>
-				<u-upload ref="uUpload" :size-type="['original']" name="Image" :max-count="9" @on-uploaded="submit"
-					:auto-upload="false"></u-upload>
+					<block>
+						<u-upload
+							ref="uUpload"
+							:size-type="['original']"
+							name="Image"
+							:max-count="9"
+							:header="header"
+							:action="uploadImgUrl"
+							@on-uploaded="submit"
+							:auto-upload="false"
+						></u-upload>
+					</block>
 				<view class="base_line_light" />
 
 				<!-- 	<u-upload
@@ -245,6 +255,24 @@
 
 					show_gongzhonghao: false // 是否挂牌公众号
 
+				},
+				// upload
+				uploadImgUrl: this.$c.domain + 'common/upload',
+				form: {
+					title: '',
+					type: 1,
+					topicId: '',
+					discussId: '',
+					content: '',
+					media: [],
+					longitude: 0,
+					latitude: 0,
+					address: '',
+					cut: 0,
+					pay: '',
+				},
+				header: {
+					token: uni.getStorageSync('token')
 				}
 			}
 		},
@@ -279,8 +307,64 @@
 			generalInfoShowGZHChange(show) {
 				this.general_info.show_gongzhonghao = show
 			},
-			submit() {
-
+			
+			uploadImg() {
+				if (!this.form.topicId) {
+					this.$u.toast('请选择圈子');
+					return;
+				}
+			
+				if (!this.form.content) {
+					this.$u.toast('内容不能为空');
+					return;
+				}
+				if (!this.form.title) {
+					this.$u.toast('标题不能为空');
+					return;
+				}
+				// if(this.form.cut==1){
+				// 	var ret=/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+				// 	if(!ret.test(this.form.pay)){
+				// 		this.$u.toast('输入金额不合法');
+				// 		return;
+				// 	}
+				// 	if(this.form.pay<=0){
+				// 		this.$u.toast('输入金额必须大于0');
+				// 		return;
+				// 	}
+				// 	if(this.form.pay>100){
+				// 		this.$u.toast('输入金额必须小于100');
+				// 		return;
+				// 	}
+				// }
+				uni.showLoading({
+					mask: true,
+					title: '发布中'
+				});
+				this.$refs.uUpload.upload();
+			},
+			submit(e) {
+				uni.showLoading({
+					mask: true,
+					title: '发布中'
+				});
+			
+				let mediaList = [];
+				e.forEach(function(item, index) {
+					mediaList.push(item.response.result);
+				});
+			
+				this.form.media = mediaList;
+			
+				this.$H.post('post/addPost', this.form).then(res => {
+					if (res.code == 0) {
+						console.log('post:' + JSON.stringify(res))
+						// uni.redirectTo({
+						// 	url: '/pages/post/detail?id=' + res.result
+						// });
+					}
+					uni.hideLoading();
+				});
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 <template>
 	<view class="u-wrap">
-		<view class="u-search-box" @click="toSearch"><u-search placeholder="请输入名称搜索圈子" v-model="keyword" @search="search" :show-action="false"></u-search></view>
+		<!-- <view class="u-search-box" @click="toSearch"><u-search placeholder="请输入名称搜索圈子" v-model="keyword" @search="search" :show-action="false"></u-search></view> -->
 		<view class="u-menu-wrap">
 			<scroll-view scroll-y scroll-with-animation class="u-tab-view menu-scroll-view" :scroll-top="scrollTop">
 				<view

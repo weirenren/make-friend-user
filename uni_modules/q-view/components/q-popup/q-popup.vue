@@ -54,9 +54,12 @@ export default {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 .popup-wrap {
-	width: 100%;
+	// width: 100%;
 	position: fixed;
-	bottom: 0;
+
+	bottom: 20rpx;
+	left: 12%;
+	right: 12%;
 	background-color: #ffffff;
 	z-index: 999999;
 	animation-name: mymove;

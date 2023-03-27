@@ -115,7 +115,7 @@
 		background-color: #eee;
 		margin-top: 20rpx;
 		padding: 20rpx;
-		font-size: 12px;
+		font-size: 16px;
 		line-height: 1.8;
 		border-radius: 10rpx;
 	}
@@ -138,32 +138,35 @@
 	}
 	
 	.comment-msg-item .msg-c .msg-c-t .time{
-		font-size: 10px;
+		font-size: 18px;
 		color: #999;
 		margin-left: auto;
 	}
 	.comment-msg-item .msg-c .username {
-		margin-bottom: 20rpx;
+		margin-bottom: 10rpx;
+		font-size: 18px;
 		color: #2B85E4;
 	}
 	.comment-msg-item .msg-c .msg-c-txt{
 		display: flex;
 		align-items: center;
+		font-size: 18px;
 	}
 	.comment-msg-item .msg-c .msg-c-txt .dot{
-		width: 10rpx;
-		height: 10rpx;
+		width: 20rpx;
+		height: 20rpx;
 		background-color: #FA3534;
 		border-radius: 50%;
 		display: block;
-		margin-left: 20rpx;
+		margin-left: 10rpx;
 	}
 	
 	/*标记已读*/
 	.read-tips{
-		padding: 20rpx;
+		padding: 15rpx;
 		background-color: #f5f5f5;
 		display: flex;
+		font-size: 15px;
 	}
 	
 	.read-tips text{

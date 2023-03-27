@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 投票弹窗 -->
-		<q-popup v-model="showVotePopup" height="100%">
+		<q-popup v-model="showVotePopup" height="95%">
 			<scroll-view scroll-y style="height: 100%;">
 				<view class="vote-wrap">
 					<q-field v-model="title" placeholder="添加标题"></q-field>

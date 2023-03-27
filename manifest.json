@@ -1,6 +1,6 @@
 {
-    "name" : "linfeng-community-uniapp",
-    "appid" : "__UNI__EC98DBC",
+    "name" : "houchanghua",
+    "appid" : "__UNI__DBFACAF",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -66,8 +66,8 @@
         "usingComponents" : true
     },
     "h5" : {
-        "title" : "林风社交论坛",
-        "domain" : "www.linfeng.tech",
+        "title" : "后厂花开实名交友",
+        "domain" : "https://sharevideo.cn/",
         "router" : {
             "base" : "./",
             "mode" : "hash"
@@ -83,6 +83,13 @@
                     "key" : "PDIBZ-CLV3W-ZRQRJ-RHAGW-AOVPO-TGFC2"
                 }
             }
-        }
+        },
+        "devServer" : {
+            "port" : 8080,
+			"host": "0.0.0.0",
+			"public": "0.0.0.0:8080",
+			"disableHostCheck": true
+        },
+        "template" : "index.html"
     }
 }

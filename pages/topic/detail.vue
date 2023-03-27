@@ -72,13 +72,13 @@
 				<text>菜单</text>
 			</view>
 			<view @click="onPlus" class="tab-item mid-button"><u-icon name="plus" size="50"></u-icon></view>
-			<navigator url="/pages/more/more" open-type="switchTab" class="tab-item" hover-class="none">
+			<navigator @click="onBack" url="/pages/more/more" open-type="switchTab" class="tab-item" hover-class="none">
 				<image class="icon" src="../../static/back.png"></image>
 				<text>返回</text>
 			</navigator>
 		</view>
 		<!-- 菜单弹框 -->
-		<q-popup v-model="showMenu">
+		<q-popup v-model="showMenu" class="popup-menu">
 			<view class="popup-head">
 				<text>菜单</text>
 				<u-icon @click="showMenu = false" size="40" class="close" color="#999" name="close"></u-icon>
@@ -168,10 +168,10 @@
 					<u-icon class="icon" size="40" name="photo" color="#1aa3ff"></u-icon>
 					<text>发布帖子</text>
 				</view>
-				<view @click="onTrigger(2)" class="type-item" v-if="isOpen==1">
+				<!-- <view @click="onTrigger(2)" class="type-item" v-if="isOpen==1">
 					<u-icon class="icon" size="40" name="play-circle-fill" color="#ff5c33"></u-icon>
 					<text>发布视频</text>
-				</view>
+				</view> -->
 				<view @click="onTrigger(3)" class="type-item">
 					<image class="icon" src="/static/h_1.png"></image>
 					<text>发布投票</text>
@@ -730,11 +730,19 @@ page {
 
 // 菜单
 .tabbar{
-	position: fixed;
-	bottom: 50rpx;
-	width: 70%;
+	
+	position:fixed;
+	bottom: 60rpx;
+		left:0;
+		right:0;
 	margin-left: 15%;
 	margin-right: 15%;
+		
+	// position: fixed;
+	// bottom: 50rpx;
+	// width: 70%;
+	// margin-left: 15%;
+	// margin-right: 15%;
 	background-color: #fff;
 	display: flex;
 	padding: 10rpx;
@@ -766,6 +774,7 @@ page {
 
 // 菜单弹窗
 .popup-head{
+	
 	text-align: center;
 	font-size: 24rpx;
 	position: relative;
@@ -777,6 +786,10 @@ page {
 		right: 30rpx;
 		top: 30rpx;
 	}
+}
+
+.popup-menu{
+	bottom: 30rpx;
 }
 
 .menu-icon{
