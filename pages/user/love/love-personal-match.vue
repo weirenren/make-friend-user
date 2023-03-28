@@ -6,20 +6,17 @@
 			<!-- <view v-if="show_wechat">TA的微信是：{{wechat}}，可以加微信交流啦</view> -->
 		</view>
 
-
 		<view class="body">
-
 			<text>输入对方的交友名片码：</text>
 			<input placeholder="请输入6位数字" placeholder-class="placeholder" v-model="taPersonCode"></input>
-
 		</view>
 		<view class="bottom">
 			<q-button @click="OK()">确认查询</q-button>
 		</view>
 
-		<view class="bottom">
+		<view class="bottom-button">
 			<text>对方名片码：{{taPersonCode}}</text>
-			<q-button @click="OK()">确认查询</q-button>
+			<q-button @click="persionOpBtn()">{{persionOpBtnContent}}</q-button>
 		</view>
 
 	</view>
@@ -30,7 +27,8 @@
 		data() {
 			return {
 				personLoveId: '',
-				taPersonCode: '',
+				taPersonCode: '123456',
+				taPersonPostId: '',
 				personalActiveStatus: 0,
 				triggerGender: 0,
 				persionOpBtnContent: ''
@@ -38,17 +36,29 @@
 		},
 		onLoad: function(opt) {
 			this.loadPersonalCode()
+			this.loadWaitingMatch()
 		},
 		methods: {
 			loadPersonalCode() {
 				this.$H.post('love/cp/personCode').then(res => {
-
+				
 					if (res.result) {
 						this.personLoveId = res.result
 					}
+				
+					// this.loadStepStatus()
+					console.log("personCode res:" + JSON.stringify(res))
+				});
+			},
+			loadWaitingMatch() {
+				this.$H.post('love/cp/findWaitingMatch').then(res => {
+
+					if (res.result) {
+						// this.personLoveId = res.result
+					}
 
 					// this.loadStepStatus()
-					console.log("res:" + JSON.stringify(res))
+					console.log("findWaitingMatch res:" + JSON.stringify(res))
 				});
 			},
 			jumpTopic(id) {
@@ -56,14 +66,12 @@
 					url: '/pages/post/detail?id=' + id
 				});
 			},
-			refreshMatchOperateStatus(personalMatchStatus) {
+			refreshMatchOperateStatus() {
 				if (this.personalActiveStatus == 0) {
 					this.persionOpBtnContent = "向对方申请，查看对方交友帖子"
-				} else if (this.personalActiveStatus == 1) {
 					
+				} else if (this.personalActiveStatus == 1) {
 					const userInfo = uni.getStorageSync("userInfo")
-					// console.log("user:" + JSON.stringify(userInfo))
-					const male = userInfo.gender == 0
 					if (userInfo.gender == this.triggerGender) {
 						this.persionOpBtnContent = "对待对方同意中"
 					} else {
@@ -72,6 +80,63 @@
 					
 				} else if (this.personalActiveStatus == 2) {
 					this.persionOpBtnContent = "点击查看对方交友帖子"
+				}
+			},
+			persionOpBtn() {
+				if (this.personalActiveStatus == 0) {
+					this.$H.post('love/cp/addPersonalMatch', {
+						personCode: this.taPersonCode
+					}).then(res => {
+						this.operateResponse(res)
+					});
+					
+				} else if (this.personalActiveStatus == 1) {
+					this.$H.post('love/cp/updatePersonalMatch', {
+						personCode: this.taPersonCode
+					}).then(res => {
+						this.operateResponse(res)
+					});
+					
+				} else if (this.personalActiveStatus == 2) {
+					
+					this.jumpTopic(this.taPersonPostId)
+					// if (matchUserList.length > 0) {
+					// 	//
+					// 	uni.navigateTo({
+					// 		url: '/pages/user/love/love-activity-match?match_users=' + encodeURIComponent(JSON
+					// 			.stringify(matchUserList))
+					// 	});
+					// }
+				}
+				
+				
+			},
+			operateResponse(res) {
+				console.log("findPersonalMatch res:" + JSON.stringify(res))
+				if (res.code == 0) {
+					// this.jumpTopic(res.result[0])
+					// todo 申请状态：0：需向对方提交申请；1: 等待对方同意；2: 对方已经同意；
+					// 添加一个字段 表示谁先发出申请
+					
+					if (res.result) {
+						this.personalActiveStatus = res.result.activeStatus
+						this.triggerGender = res.result.genderTrigger
+						this.taPersonPostId = res.result.lovePostId
+					} else {
+						
+					}
+					
+					uni.showToast({
+						title: "请求成功",
+						icon: "none",
+						duration: 3000
+					});
+					
+					this.refreshMatchOperateStatus()
+				
+				} else {
+					console.log("not found")
+					this.showNotFoundView()
 				}
 			},
 			// todo 实现不同状态下 按钮功能
@@ -101,7 +166,7 @@
 					// }
 				
 					// this.loadStepStatus()
-					console.log("res:" + JSON.stringify(res))
+					console.log("findPersonalMatch res:" + JSON.stringify(res))
 					if (res.code == 0) {
 						// this.jumpTopic(res.result[0])
 						// todo 申请状态：0：需向对方提交申请；1: 等待对方同意；2: 对方已经同意；
@@ -110,16 +175,20 @@
 						if (res.result) {
 							this.personalActiveStatus = res.result.activeStatus
 							this.triggerGender = res.result.genderTrigger
+							this.taPersonPostId = res.result.lovePostId
 						} else {
 							
 						}
-					
 						
+						this.refreshMatchOperateStatus()
+					
 					} else {
 						console.log("not found")
 						this.showNotFoundView()
 					}
 				});
+				
+				
 				// this.$H.post('love/cp/pPostId', {
 				// 	personCode: this.taPersonCode
 				// }).then(res => {
@@ -191,6 +260,13 @@
 		.bottom {
 			display: flex;
 			justify-content: center;
+		}
+		
+		.bottom-button {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			margin-top: 100rpx;
 		}
 	}
 </style>
