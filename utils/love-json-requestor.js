@@ -12,16 +12,24 @@ export default {
 	},
 	
 	// 交友业务下的普通帖子数据结构
-	createCommonPost(city = 'beijing', gender = 0, title, content) { 
+	createCommonPost(city = 'beijing', gender = 0, title, content, wechatId) { 
 		return {
 			post_type: 11, // 自定义
 			city, // 最初是北京： beijing
 			gender,
 			title,
 			content,
+			wechatId,
 		}
 	},
-	
+	getExactWechatIdFromPost(postContent) {
+		// console.log('exact:' + postContent)
+		try{
+			return JSON.parse(postContent).wechatId
+		}catch(e) {
+			return postContent
+		}
+	},
 	getExactContentFromPost(postContent) {
 		// console.log('exact:' + postContent)
 		try{

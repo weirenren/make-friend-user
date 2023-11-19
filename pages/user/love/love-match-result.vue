@@ -9,11 +9,9 @@
 						:post_content="getPostContent(item.content)">
 					</love-userpost-info>
 				</view>
-				<button @click="showCancelActionPop = true;">取消喜欢</button>
-				<u-popup v-model="showCancelActionPop" mode="center" width="60%" height="20%" border-radius="10"  :closeable="true">
-					<view>
-						<u-button @click="submitCancelMatchResult(item, index)" style="margin-top: 20%;">确定?</u-button>
-					</view>
+				<u-button @click="showCancelActionPop = true;">取消喜欢</u-button>
+				<u-popup  class="popup-content" v-model="showCancelActionPop" mode="center" border-radius="10"  :closeable="true">
+					<u-button class="button-layout" @click="submitCancelMatchResult(item, index)">确定?</u-button>
 				</u-popup>
 				<view class="base_line_light"></view>
 			</block>
@@ -171,5 +169,18 @@
 		background-color: #f7f7f7;
 		height: 2rpx;
 		margin-left: 20rpx;
+	}
+	
+	.popup-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		
+		.button-layout {
+			width: 400rpx;
+			height: 200rpx;
+			// margin-top: 50%;
+		}
 	}
 </style>

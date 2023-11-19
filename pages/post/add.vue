@@ -347,8 +347,17 @@ export default {
 	}
 };
 </script>
-
+/* <style>
+	page {
+		background-color: #fefcff;
+		height: 100%;
+	}
+</style> */
 <style lang="scss" scoped>
+	.container {
+		background-color: #f5f5f5;
+		height: 100%;
+	}
 .title-input{
 	border-bottom: 1px solid #F5F5F5;
 	margin: 20rpx 0;

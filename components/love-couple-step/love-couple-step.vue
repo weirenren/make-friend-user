@@ -1,14 +1,15 @@
 <template>
 	<view class="container_step">
-		<view>
+		<view class="step">
 			step {{step_index}}
 		</view>
-		<view>
+		<view class="msg">
 			<view v-if="step_status == 1" class="step_green">{{step_description}}</view>
+			<view v-else-if="step_status == 2" class="step_yellow">{{step_description}}</view>
 			<view v-else>{{step_description}}</view>
 			
 		</view>
-		<view>剩余{{step_day}}天</view>
+		<view class="days">剩余{{step_day}}天</view>
 	</view>
 </template>
 
@@ -51,17 +52,35 @@
 	display: flex;
 	width: 100%;
 	margin: 20rpx 0;
+	padding-left: 20rpx;
 	// display: flex;
 	// flex-direction: column;
 	// justify-content: center;
 	// flex-direction: row;
 	justify-content: space-around;
 	
+	.step {
+		flex: 2;
+	}
+	
+	.msg {
+		flex: 5;
+	}
+	
+	.days {
+		flex: 1.5;
+	}
+	
+	
 	.step_green {
 		background-color: aquamarine;
 	}
 	.step_gray {
 		background-color: gray;
+	}
+	
+	.step_yellow {
+		background-color: coral;
 	}
 }
 </style>

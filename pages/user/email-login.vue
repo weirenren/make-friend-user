@@ -113,6 +113,7 @@
 			},
 			getUserInfo() {
 				this.$H.get("user/userInfo").then(res => {
+					console.log("login:" + JSON.stringify(res.result))
 					uni.setStorageSync("userInfo", res.result)
 					uni.setStorageSync("email", res.result.email)
 				})

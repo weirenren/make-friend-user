@@ -9,7 +9,7 @@
 		<!-- 最新 -->
 		<view>
 			<view class="topic-wrap">
-				<view v-if="joinTopicList && joinTopicList.length > 0" class="block-title">
+			<!-- 	<view v-if="joinTopicList && joinTopicList.length > 0" class="block-title">
 					<view>我加入的圈子</view>
 					<view style="display: flex;">
 						<text @click="jumpMoreQuanzi">
@@ -18,7 +18,7 @@
 						<u-image style="margin-top: 4rpx;" width="25rpx" height="25rpx" src="/static/images/icon/right.png"></u-image>
 					</view>
 					
-				</view>
+				</view> -->
 				<u-grid @click="jump" :col="5" :border="false">
 					<!-- 我的圈子 -->
 					<u-grid-item :index="'/pages/topic/detail?id='+item.id"
@@ -41,7 +41,7 @@
 				</u-grid>
 			</view>
 			
-			<love-activity-enter v-if="renderActivityView" :act_object="getActivityPost()"></love-activity-enter>
+			<!-- <love-activity-enter v-if="renderActivityView" :act_object="getActivityPost()"></love-activity-enter> -->
 		
 			<post-list :list="lastPost" :loadStatus="loadStatus4" :showTag="true"></post-list>
 			<!-- <post-waterfall :list="lastPost" :loadStatus="loadStatus4"></post-waterfall> -->

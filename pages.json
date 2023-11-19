@@ -8,13 +8,13 @@
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
 		"list": [
-			{
-				"pagePath": "pages/user/love/recommend",
-				"iconPath": "static/tabbar/quanzi-1.png",
-				"selectedIconPath": "static/tabbar/quanzi.png",
-				"text": "推荐"
-				
-			},
+			// {
+			// 	"pagePath": "pages/user/love/recommend",
+			// 	"iconPath": "static/tabbar/quanzi-1.png",
+			// 	"selectedIconPath": "static/tabbar/quanzi.png",
+			// 	"text": "推荐"
+
+			// },
 			{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home-1.png",
@@ -32,7 +32,7 @@
 				"iconPath": "static/tabbar/msg-1.png",
 				"selectedIconPath": "static/tabbar/msg.png",
 				"text": "消息"
-			
+
 			},
 			{
 				"pagePath": "pages/my/my",
@@ -43,13 +43,13 @@
 		]
 	},
 	"pages": [
-		{
-			"path": "pages/user/love/recommend",
-			"style": {
-				"navigationBarTitleText": "后厂花开"
-			}
-		},
-		
+		// {
+		// 	"path": "pages/user/love/recommend",
+		// 	"style": {
+		// 		"navigationBarTitleText": "后厂花开"
+		// 	}
+		// },
+		//  pages配置项中的第一个页面，作为当前工程的首页（启动页）
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -57,6 +57,18 @@
 				// "backgroundColor": "#fff",
 				"navigationBarTextStyle": "black",
 				"enablePullDownRefresh": true
+				// "app-plus": {
+				// 	"titleNView": {
+				// 		// 按钮配置
+				// 		"buttons": [{
+				// 			"fontWeight": "bold", // 按钮上文字的粗细。可取值"normal"-标准字体、"bold"-加粗字体。默认值为 normal
+				// 			"fontSize": "14", // 按钮上文字大小
+				// 			"text": "发布"
+				// 		}]
+				// 	}
+				// }
+
+
 				// "navigationStyle":"custom"
 			}
 		}, {
@@ -92,7 +104,7 @@
 			"style": {
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": true,
-				"navigationBarTextStyle":"white"
+				"navigationBarTextStyle": "white"
 			}
 		}, {
 			"path": "pages/discuss/detail",
@@ -138,7 +150,7 @@
 			"path": "pages/more/more",
 			"style": {
 				"enablePullDownRefresh": true,
-				"navigationStyle":"custom"
+				"navigationStyle": "custom"
 			}
 		}, {
 			"path": "pages/topic/class-list",
@@ -174,7 +186,7 @@
 				"enablePullDownRefresh": false
 			}
 
-		},{
+		}, {
 			"path": "pages/post/video-detail",
 			"style": {
 				"navigationBarTitleText": "",
@@ -191,15 +203,15 @@
 				"navigationStyle": "custom"
 			}
 
-		}, 
-		
+		},
+
 		{
-		    "path" : "pages/system/system",
-		    "style": {
-		    	"navigationBarTitleText": "系统消息",
-		    	"enablePullDownRefresh": true
-		    }
-		    
+			"path": "pages/system/system",
+			"style": {
+				"navigationBarTitleText": "系统消息",
+				"enablePullDownRefresh": true
+			}
+
 		},
 		{
 			"path": "pages/discuss/list",
@@ -208,216 +220,172 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/choose-topic/choose-topic",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/webview/webview",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/topic/topic-user",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/user/sms-login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/topic/info-edit",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/topic/add/shoose-class",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/topic/admin",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/vote/vote",
+			"style": {
+				"navigationBarTitleText": "投票",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/choose-discuss/choose-discuss",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/choose-topic/choose-topic",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/webview/webview",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/topic/topic-user",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/sms-login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/topic/info-edit",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/topic/add/shoose-class",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/topic/admin",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/vote/vote",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "投票",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/choose-discuss/choose-discuss",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/search/search",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/pay/pay",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/account/account",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/bill/bill",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/message/more",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "所有私信",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-        ,{
-            "path" : "pages/sign/sign",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "签到",
-                "enablePullDownRefresh": false
-            }
-            
-        },
+
+		, {
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/account/account",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/bill/bill",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/message/more",
+			"style": {
+				"navigationBarTitleText": "所有私信",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/sign/sign",
+			"style": {
+				"navigationBarTitleText": "签到",
+				"enablePullDownRefresh": false
+			}
+
+		},
 		{
-		    "path" : "pages/sign/integral",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "我的积分",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-        ,{
-            "path" : "pages/user/contact",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "联系客服",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/luck-draw/luck-draw",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "抽奖",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/luck-draw/prize-record",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "抽奖记录",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/go-login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/email-login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/register",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/protocol",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }, {
+			"path": "pages/sign/integral",
+			"style": {
+				"navigationBarTitleText": "我的积分",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/contact",
+			"style": {
+				"navigationBarTitleText": "联系客服",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/luck-draw/luck-draw",
+			"style": {
+				"navigationBarTitleText": "抽奖",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/luck-draw/prize-record",
+			"style": {
+				"navigationBarTitleText": "抽奖记录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/go-login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/email-login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/protocol",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
 			"path": "pages/user/love/love-user-preview",
 			"style": {
 				"navigationBarTitleText": "",
@@ -432,7 +400,72 @@
 			}
 
 		}, {
-            "path" : "pages/user/love/love-edit",
+			"path": "pages/user/love/love-edit",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/recommend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-match-result",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-activity-detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-activity-add",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-activity-match",
+			"style": {
+				"navigationBarTitleText": "活动匹配",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-couple",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/love/love-personal-match",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/user/love/love-personal-match-mainpage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/short/login",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -441,7 +474,7 @@
             
         }
         ,{
-            "path" : "pages/user/love/recommend",
+            "path" : "pages/short/match",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -450,7 +483,7 @@
             
         }
         ,{
-            "path" : "pages/user/love/love-match-result",
+            "path" : "pages/short/edit_act",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -459,7 +492,7 @@
             
         }
         ,{
-            "path" : "pages/user/love/love-activity-detail",
+            "path" : "pages/short/add_user",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -468,7 +501,7 @@
             
         }
         ,{
-            "path" : "pages/user/love/love-activity-add",
+            "path" : "pages/short/edit_person",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -477,25 +510,7 @@
             
         }
         ,{
-            "path" : "pages/user/love/love-activity-match",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "活动匹配",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/love/love-couple",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/love/love-personal-match",
+            "path" : "pages/short/see_match",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

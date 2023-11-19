@@ -2,12 +2,12 @@
 	<view>
 		<view class="tabbar-wrap">
 			<block v-for="(item, index) in list" :key="index">
-				<view @click="onTab(item, index)" v-show="active !== index" class="tab-item">
+				<view @click="onTab(item, index)" v-show="active != index" class="tab-item">
 					<image class="icon" :class="{ 'mid-button': item.midButton }" :src="item.iconPath"></image>
 					<text class="txt" :style="{ color: color }">{{ item.text }}</text>
 					<text v-if="count[index] > 0" class="number">{{count[index] | maxNum}}</text>
 				</view>
-				<view @click="onTab(item, index)" v-show="active === index" class="tab-item">
+				<view @click="onTab(item, index)" v-show="active == index" class="tab-item">
 					<image class="icon" :class="{ 'mid-button': item.midButton }" :src="item.selectedIconPath"></image>
 					<text class="txt" :style="{ color: selectedColor }">{{ item.text }}</text>
 					<text v-if="count[index] > 0" class="number">{{count[index] | maxNum}}</text>
@@ -104,6 +104,7 @@ export default {
 	methods: {
 
 		onTab(e, index) {
+			console.log("index:" + index)
 			if (!e.isCustom) {
 				uni.switchTab({
 					url: e.pagePath
@@ -182,8 +183,8 @@ export default {
 			align-items: center;
 		}
 		.mid-button {
-			width: 50px;
-			height: 50px;
+			width: 40px;
+			height: 40px;
 		}
 	}
 	

@@ -25,6 +25,7 @@
 			normalLikeCB(){
 				// console.log('normalLikeCB')
 				// this.decreaseRecommendView()
+				
 			},
 			likeCB(){
 				// console.log('likeCB')
@@ -34,6 +35,7 @@
 				// console.log('unlikeCB')
 				// this.decreaseRecommendView()
 			},
+			
 		}
 	}
 </script>

@@ -79,7 +79,7 @@
 		<!-- 删除私信消息弹窗 -->
 		<u-action-sheet :list="sheetList" v-model="showChatSheet" @click="onSheeChat"></u-action-sheet>
 		<!-- tabbar -->
-		<q-tabbar :active="3" :count="msgCount"></q-tabbar>
+		<q-tabbar :active="2" :count="msgCount"></q-tabbar>
 	</view>
 </template>
 

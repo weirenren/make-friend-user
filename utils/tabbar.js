@@ -1,10 +1,16 @@
 export default {
 	list: [
+		// {
+		// 	"pagePath": "/pages/user/love/recommend",
+		// 	"iconPath": "/static/tabbar/recommend.png",
+		// 	"selectedIconPath": "/static/tabbar/recommend_selected.png",
+		// 	"text": "推荐"
+		// },
 		{
-			"pagePath": "/pages/user/love/recommend",
-			"iconPath": "/static/tabbar/recommend.png",
-			"selectedIconPath": "/static/tabbar/recommend_selected.png",
-			"text": "推荐"
+			iconPath: '/static/tabbar/add.png',
+			selectedIconPath: '/static/tabbar/add.png',
+			midButton: true,
+			isCustom: true
 		},
 		{
 			"pagePath": "/pages/index/index",
@@ -18,12 +24,7 @@ export default {
 		// 	"selectedIconPath": "/static/tabbar/quanzi.png",
 		// 	"text": "圈子"
 		// },
-		{
-			iconPath: '/static/tabbar/add.png',
-			selectedIconPath: '/static/tabbar/add.png',
-			midButton: true,
-			isCustom: true
-		},
+	
 		{
 			"pagePath": "/pages/message/message",
 			"iconPath": "/static/tabbar/msg-1.png",
@@ -53,15 +54,15 @@ export default {
 			text: '交友',
 			url: '/pages/post/love-add'
 		},
-		{
-			icon: '/static/h_1.png',
-			text: '投票',
-			url: '/pages/vote/vote'
-		},
-		{
-			icon: '/static/h_3.png',
-			text: '活动',
-			url: '/pages/user/love/love-activity-add'
-		}
+		// {
+		// 	icon: '/static/h_1.png',
+		// 	text: '投票',
+		// 	url: '/pages/vote/vote'
+		// },
+		// {
+		// 	icon: '/static/h_3.png',
+		// 	text: '活动',
+		// 	url: '/pages/user/love/love-activity-add'
+		// }
 	]
 }

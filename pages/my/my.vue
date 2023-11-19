@@ -34,10 +34,10 @@
 					<text>{{ userInfo.postNum || 0}}</text>
 					<view class="grid-text">帖子</view>
 				</u-grid-item>
-				<u-grid-item index="/pages/sign/integral">
+				<!-- <u-grid-item index="/pages/sign/integral">
 					<text>{{ userInfo.integral || 0}}</text>
 					<view class="grid-text">积分</view>
-				</u-grid-item>
+				</u-grid-item> -->
 			</u-grid>
 		</view>
 		<!-- 我的服务 -->
@@ -57,7 +57,7 @@
 			</view>
 		</view>
 		<!-- tabbar -->
-		<q-tabbar :active="4" :count="msgCount"></q-tabbar>
+		<q-tabbar :active="3" :count="msgCount"></q-tabbar>
 	</view>
 </template>
 
@@ -130,13 +130,13 @@
 						name: "交友发帖",
 						url: "/pages/post/love-add",
 					}, 
-					{
-						name: "心动任务",
-						url: "/pages/user/love/love-couple"
-					},
+					// {
+					// 	name: "心动任务",
+					// 	url: "/pages/user/love/love-couple"
+					// },
 					{
 						name: "个人匹配",
-						url: "/pages/user/love/love-personal-match"
+						url: "/pages/user/love/love-personal-match-mainpage"
 					}
 				]
 			},

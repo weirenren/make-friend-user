@@ -99,8 +99,8 @@
 			this.currentUid = uni.getStorageSync("userInfo").uid
 			this.currentGender = uni.getStorageSync("userInfo").gender
 
-			console.log("userInfo:" + JSON.stringify(uni.getStorageSync("userInfo")))
-			console.log("postId:" + options.id)
+			// console.log("userInfo:" + JSON.stringify(uni.getStorageSync("userInfo")))
+			// console.log("postId:" + options.id)
 			this.postId = options.id
 			this.requestActivityData(options.id)
 			this.queryActivityUsers()
@@ -180,7 +180,7 @@
 
 						if (res) {
 
-							console.log("detal:" + JSON.stringify(res.result.content))
+							// console.log("detal:" + JSON.stringify(res.result.content))
 
 							this.act_object = JSON.parse(res.result.content)
 							// var exist = res.result
@@ -210,7 +210,7 @@
 			},
 			queryActivityUsers() {
 				if (this.postId < 0) return
-				console.log("postId:" + this.postId)
+				// console.log("postId:" + this.postId)
 
 				this.$H
 					.post('love/activity/users', {
@@ -228,7 +228,7 @@
 
 						if (res && res.result.length > 0) {
 
-							console.log("users:" + JSON.stringify(res.result))
+							// console.log("users:" + JSON.stringify(res.result))
 							this.applyUserList = res.result
 
 							this.refreshApplyStatus()

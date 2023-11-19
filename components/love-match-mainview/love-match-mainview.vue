@@ -69,7 +69,10 @@
 
 			// [{"id":17,"uid":114,"lovePostId":166,"gender":0,"postId":187,"createTime":"2023-01-01 22:32:03","applyStatus":1},
 			// {"id":25,"uid":148,"lovePostId":191,"gender":1,"postId":187,"createTime":"2023-02-08 22:16:11","applyStatus":1}]
-			console.log('loveMatchList match:' + JSON.stringify(this.loveMatchList))
+			
+			// 1. 重要的字段是"uid" ,"lovePostId", uid 是对方的uid；
+			// 2. postID 是活动的ID, 个人匹配 互选功能 复用活动模块下的匹配页面，今后会优化这块功能
+			// console.log('loveMatchList match:' + JSON.stringify(this.loveMatchList))
 			this.nextLoveMatch()
 		},
 		methods: {
@@ -80,32 +83,38 @@
 				})
 			},
 			unlikeCallback() {
-				console.log("unlikeCallback")
+				console.log("unlikeCallback:" + this.nextMatchIndex)
 				if (!this.checkContinueMatch()) {
 					return
 				}
-
-				this.submitLoveMatchResult(loveJsonRequestor.LikeType_DISLIKE, this.loveMatchList[this.nextMatchIndex - 1])
-				this.nextLoveMatch()
-				this.doRefreshCompoment()
+				
+				
+				const current_user = this.loveMatchList[this.nextMatchIndex - 1]
 
 				if (this.unlike) {
-					this.unlike()
+					this.unlike(current_user.uid)
 				}
+				
+				this.submitLoveMatchResult(current_user.uid, loveJsonRequestor.LikeType_DISLIKE, this.loveMatchList[this.nextMatchIndex - 1])
+				this.nextLoveMatch()
+				this.doRefreshCompoment()
 			},
 			likeCallback() {
-				console.log("likeCallback")
+				console.log("likeCallback:" + this.nextMatchIndex)
 				if (!this.checkContinueMatch()) {
 					return
 				}
 
-				this.submitLoveMatchResult(loveJsonRequestor.LikeType_LIKE, this.loveMatchList[this.nextMatchIndex - 1])
+				const current_user = this.loveMatchList[this.nextMatchIndex - 1]
+				
+				if (this.like) {
+					this.like(current_user.uid)
+				}
+				
+				this.submitLoveMatchResult(current_user.uid, loveJsonRequestor.LikeType_LIKE, this.loveMatchList[this.nextMatchIndex - 1])
 				this.nextLoveMatch()
 				this.doRefreshCompoment()
-
-				if (this.like) {
-					this.like()
-				}
+				
 			},
 			normallikeCallback() {
 				console.log("normallikeCallback: " + this.nextMatchIndex)
@@ -113,27 +122,36 @@
 					return
 				}
 
-				this.submitLoveMatchResult(loveJsonRequestor.LikeType_NORMAL, this.loveMatchList[this.nextMatchIndex - 1])
+				const current_user = this.loveMatchList[this.nextMatchIndex - 1]
+				if (this.normalLike) {
+					this.normalLike(current_user.uid)
+				}
+				
+				this.submitLoveMatchResult(current_user.uid, loveJsonRequestor.LikeType_NORMAL, this.loveMatchList[this.nextMatchIndex - 1])
 				this.nextLoveMatch()
 				this.doRefreshCompoment()
 
-				if (this.normalLike) {
-					this.normalLike()
-				}
 			},
-			submitLoveMatchResult(likeType, post) {
+			submitLoveMatchResult(uid, likeType, post) {
 				const value = loveJsonRequestor.LikeType_DISLIKE
-				// console.log('json:' + JSON.stringify(post))
+
+				const userInfo = uni.getStorageSync("userInfo")
+				console.log('post:' + JSON.stringify(post) + " userInfo:" + JSON.stringify(userInfo))
 				this.$H
 					.post('love/addMatch', {
-						fromUid: -1,
+						fromUid: userInfo.uid,
 						postType: 1,
 						likeType: likeType,
-						toUid: post.uid,
+						toUid: uid,
 						comments: '',
-						postId: post.id
+						postId: post.lovePostId
 					})
 					.then(res => {
+						
+						console.log("love/addMatch:" + JSON.stringify(res))
+						if (res.code == 0 && res.result == false) {
+							// TODO： 说明已经添加， 待处理
+						}
 						// 	if (res.code == 500) {
 						// 		this.$u.toast(res.msg);
 						// 		setTimeout(function() {
@@ -176,11 +194,8 @@
 				if (this.nextMatchIndex < this.loveMatchList.length) {
 
 					const current_user = this.loveMatchList[this.nextMatchIndex]
-					
-					console.log("cuser:" + JSON.stringify(current_user))
+			
 					const lovePostId = current_user.lovePostId
-
-
 					this.$H
 						.get('post/detail', {
 							id: lovePostId
@@ -198,11 +213,13 @@
 							if (res.result && res.code == 0) {
 								// this.loveMatchList = res.result
 								
-								console.log("res:" + JSON.stringify(res))
+								// console.log("res:" + JSON.stringify(res))
 
 								this.currentShowContent = loveJsonRequestor.getExactContentFromPost(res.result.content)
 								this.currentShowTitle = res.result.title
 								this.media = res.result.media
+								
+								// ToDo 
 								// this.nextLoveMatch()
 							}
 
